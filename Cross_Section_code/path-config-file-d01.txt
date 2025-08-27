@@ -1,0 +1,1 @@
+/home/Mobin/OUTPUT/WRF01/WRF01_output/wind_forecasts/gfs.2024022212/wrfout_d01_2024-02-22_14:00:00.mean.nc

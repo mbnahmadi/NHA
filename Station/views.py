@@ -1,8 +1,16 @@
+from operator import imod
 import os
 import json
 import glob
 import re
 import base64
+
+from rest_framework import status
+from rest_framework.response import Response
+from subprocess import run, PIPE
+import tempfile
+import os
+from datetime import datetime, timedelta
 
 from django.http import JsonResponse
 from django.http import FileResponse
@@ -16,6 +24,8 @@ from django.shortcuts import render
 
 from datetime import datetime
 from PIL import Image
+
+from tasks import run_ncl_script_task
 
 
 
@@ -213,12 +223,6 @@ def parametere_pic(request):
     return FileResponse(open(path, 'rb'), content_type='image/png')
 
 
-from rest_framework import status
-from rest_framework.response import Response
-from subprocess import run, PIPE
-import tempfile
-import os
-from datetime import datetime, timedelta
 #from .utils import get_folder_name
 @api_view(['GET'])
 def soundingView(request):
@@ -237,7 +241,6 @@ def soundingView(request):
         cycle_date = datetime.strptime(cycle_str, "%Y%m%d%H")
         cycle_date += timedelta(hours=hour)
         hour = cycle_date.strftime("%Y%m%d%H")
-    print("houuuuurrrrrrrr",hour)   
              
     date = hour [0:8]
     time = hour [8:10]+ '00'
